@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:qit/ui/screens/login.dart';
 
+import 'core/router.dart';
+
 void main() {
+  Routers.defineRoutes();
   runApp(const MyApp());
 }
 
@@ -13,12 +16,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return MaterialApp(
-      title: 'QIT',
-      theme: ThemeData(
-        fontFamily: 'Roboto',
-      ),
-      debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
-    );
+        title: 'QIT',
+        theme: ThemeData(
+          fontFamily: 'Roboto',
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const LoginScreen(),
+        initialRoute: 'login',
+        onGenerateRoute: Routers.router.generator);
   }
 }

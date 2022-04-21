@@ -20,7 +20,9 @@ class LoginButton extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, 'home');
+        },
         child: Text(
           "LOGIN".toUpperCase(),
         ),
