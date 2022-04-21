@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qit/ui/screens/home.dart';
 import 'package:qit/ui/screens/login.dart';
 
 void main() {
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const LoginScreen(),
     );
   }
 }

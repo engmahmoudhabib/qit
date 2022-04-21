@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qit/core/constants.dart';
-import 'package:qit/ui/widgets/input_text.dart';
-import 'package:qit/ui/widgets/login_button.dart';
+import 'package:qit/ui/widgets/login/input_text.dart';
+import 'package:qit/ui/widgets/login/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -30,16 +30,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width * 0.115,
-                    bottom: 10),
+                  left: MediaQuery.of(context).size.width * 0.115,
+                  bottom: 10,
+                ),
                 child: const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Login',
                     style: TextStyle(
-                        fontSize: 73,
-                        color: Color(0xff1D2226),
-                        fontFamily: 'Roboto'),
+                      fontSize: 73,
+                      color: Color(
+                        0xff1D2226,
+                      ),
+                      fontFamily: 'Roboto',
+                    ),
                   ),
                 ),
               ),
@@ -52,7 +56,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Please login to your account.',
-                    style: TextStyle(fontSize: 18, color: Color(0xff1D2226)),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(
+                        0xff1D2226,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -61,8 +70,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   bottom: MediaQuery.of(context).size.height * 0.02,
                 ),
                 child: InputText(
-                    hint: 'Email Address',
-                    icon: Image.asset(AppConstants.messageFromAssets)),
+                  hint: 'Email Address',
+                  obscureText: false,
+                  textInputAction: TextInputAction.next,
+                  textInputType: TextInputType.emailAddress,
+                  icon: Image.asset(
+                    AppConstants.messageFromAssets,
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(
@@ -70,9 +85,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: InputText(
                     hint: 'Password',
+                    textInputAction: TextInputAction.done,
+                    textInputType: TextInputType.text,
+                    obscureText: true,
                     icon: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Image.asset(AppConstants.lockFromAssets),
+                      padding: const EdgeInsets.only(
+                        right: 10,
+                      ),
+                      child: Image.asset(
+                        AppConstants.lockFromAssets,
+                      ),
                     )),
               ),
               const LoginButton(),
@@ -88,7 +110,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerRight,
                   child: Text(
                     'Forgot Password?',
-                    style: TextStyle(fontSize: 14, color: Color(0xff1A1A1A)),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Color(
+                        0xff1A1A1A,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -98,7 +125,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: const Text(
                   'or login with',
-                  style: TextStyle(fontSize: 12, color: Color(0xff9D9D9D)),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(
+                      0xff9D9D9D,
+                    ),
+                  ),
                 ),
               ),
               Padding(
@@ -108,9 +140,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Image.asset(AppConstants.gmailFromAssets),
-                    Image.asset(AppConstants.facebookFromAssets),
-                    Image.asset(AppConstants.twitterFromAssets),
+                    Image.asset(
+                      AppConstants.gmailFromAssets,
+                    ),
+                    Image.asset(
+                      AppConstants.facebookFromAssets,
+                    ),
+                    Image.asset(
+                      AppConstants.twitterFromAssets,
+                    ),
                   ],
                 ),
               ),
@@ -118,13 +156,19 @@ class _LoginScreenState extends State<LoginScreen> {
               const Text.rich(
                 TextSpan(
                   text: "Don’t have an account?",
-                  style: TextStyle(fontSize: 12, color: Color(0xff1A1A1A)),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Color(
+                      0xff1A1A1A,
+                    ),
+                  ),
                   children: <TextSpan>[
                     TextSpan(
-                        text: ' Create new now!',
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                        )),
+                      text: ' Create new now!',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
                     // can add more TextSpans here...
                   ],
                 ),

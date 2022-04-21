@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 class InputText extends StatefulWidget {
   final String hint;
   final Widget? icon;
+  final bool obscureText;
+  final TextInputType? textInputType;
+  final TextInputAction? textInputAction;
   const InputText({
     Key? key,
     required this.hint,
     required this.icon,
+    required this.obscureText,
+    required this.textInputType,
+    required this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -20,6 +26,9 @@ class _InputTextState extends State<InputText> {
       height: 50,
       width: 300,
       child: TextField(
+        obscureText: widget.obscureText,
+        keyboardType: widget.textInputType,
+        textInputAction: widget.textInputAction,
         decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(50.0),
