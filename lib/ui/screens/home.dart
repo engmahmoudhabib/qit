@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: MediaQuery.of(context).size.height*0.8,
         width: MediaQuery.of(context).size.width,
             child: GridView.count(
-childAspectRatio: 9/13,
+childAspectRatio: 9/14,
   crossAxisCount: 2,
   
   children: List.generate(20, (index) {
