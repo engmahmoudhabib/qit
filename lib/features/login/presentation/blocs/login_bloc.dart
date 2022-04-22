@@ -6,7 +6,6 @@ import 'package:qit/features/login/domain/entities/login_request_model.dart';
 import 'package:qit/features/login/domain/entities/login_response_model.dart';
 import 'package:qit/features/login/domain/usecase/get_login_response.dart';
 
-
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -37,7 +36,7 @@ Stream<LoginState> _eitherLoadedOrErrorState(
 ) async* {
   yield failureOrSuccess.fold(
     (failure) => Error(_mapFailureToMessage(failure)),
-    (variant) => Loaded(response: variant),
+    (loaded) => Loaded(response: loaded),
   );
 }
 

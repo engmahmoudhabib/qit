@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:qit/core/constants.dart';
 import 'package:badges/badges.dart';
-import 'package:qit/ui/widgets/home_widgets/horizontal_list_view.dart';
-import 'package:qit/ui/widgets/home_widgets/item_card.dart';
+import 'package:qit/features/home/presentation/widgets/horizontal_list_view.dart';
+import 'package:qit/features/home/presentation/widgets/item_card.dart';
+
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

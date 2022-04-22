@@ -1,6 +1,6 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:qit/ui/screens/home.dart';
+import 'package:qit/features/home/presentation/screens/home.dart';
 import 'package:qit/features/login/presentation/screens/login.dart';
 
 

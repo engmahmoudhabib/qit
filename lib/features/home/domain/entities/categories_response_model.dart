@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:qit/features/home/domain/entities/rating_response_model.dart';
 
 import 'rating_response_model.dart';
 
