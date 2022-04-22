@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qit/features/home/presentation/screens/home.dart';
 import 'package:qit/features/login/presentation/screens/login.dart';
 import 'core/router.dart';
 // ignore: implementation_imports, unnecessary_import, import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/src/multi_bloc_provider.dart';
+import 'features/home/presentation/bloc/categories_bloc.dart';
+import 'features/home/presentation/bloc/category_bloc.dart';
 import 'features/login/presentation/blocs/login_bloc.dart';
 import 'locator.dart' as di;
 import 'locator.dart';
@@ -33,6 +36,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => sl<LoginBloc>(),
         ),
+         BlocProvider(
+          create: (_) => sl<CategoryBloc>(),
+        ),
+         BlocProvider(
+          create: (_) => sl<CategoriesBloc>(),
+        ),
       ],
       child: MaterialApp(
           title: 'QIT',
@@ -40,8 +49,8 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Roboto',
           ),
           debugShowCheckedModeBanner: false,
-          home: const LoginScreen(),
-          initialRoute: 'login',
+          home: const HomeScreen(),
+          initialRoute: 'home',
           onGenerateRoute: Routers.router.generator),
     );
   }

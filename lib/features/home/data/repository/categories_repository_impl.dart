@@ -16,7 +16,7 @@ class CategoriesRepositoryImplementation implements CategoriesRepository {
   });
 
   @override
-  Future<Either<Failure, List<String>>> getCategoriesResponse() async {
+  Future<Either<Failure, List<dynamic>>> getCategoriesResponse() async {
     if (await network.icConnected) {
       try {
         final remoteSteps = await remote.getCategoriesResponse();

@@ -29,7 +29,7 @@ class CategoriesBloc extends Bloc<CategoriesEvent, CategoriesState> {
 }
 
 Stream<CategoriesState> _eitherLoadedOrErrorState(
-  Either<Failure, List<String>> failureOrSuccess,
+  Either<Failure, List<dynamic>> failureOrSuccess,
 ) async* {
   yield failureOrSuccess.fold(
     (failure) => Error(_mapFailureToMessage(failure)),

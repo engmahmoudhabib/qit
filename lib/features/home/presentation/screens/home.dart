@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qit/core/constants.dart';
 import 'package:badges/badges.dart';
 import 'package:qit/features/home/presentation/widgets/horizontal_list_view.dart';
 import 'package:qit/features/home/presentation/widgets/item_card.dart';
 
-
+import '../bloc/category_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,23 +59,46 @@ class _HomeScreenState extends State<HomeScreen> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            SizedBox(height: MediaQuery.of(context).size.height*0.03,),
-           const HorizontalListView(),
-          const  SizedBox(height: 20,),
-          Container(
-            height: MediaQuery.of(context).size.height*0.8,
-        width: MediaQuery.of(context).size.width,
-            child: GridView.count(
-childAspectRatio: 9/14,
-  crossAxisCount: 2,
-  
-  children: List.generate(20, (index) {
-    return Center(
-      child: ItemCard(),
-    );
-  }),
-),
-          ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.03,
+            ),
+            const HorizontalListView(),
+            const SizedBox(
+              height: 20,
+            ),
+            BlocListener<CategoryBloc, CategoryState>(
+              listener: (context, state) {
+                if (state is Loadingg) {
+                  setState(() {
+                    isLoading = true;
+                  });
+                } else if (state is Loadedd) {
+                   setState(() {
+                    isLoading = false;
+                  });
+                } else if (state is Errorr) {
+                   setState(() {
+                    isLoading = false;
+                  });
+                }
+              },
+              child: isLoading == false ? Container(
+                height: MediaQuery.of(context).size.height * 0.8,
+                width: MediaQuery.of(context).size.width,
+                child: GridView.count(
+                  childAspectRatio: 9 / 14,
+                  crossAxisCount: 2,
+                  children: List.generate(20, (index) {
+                    return Center(
+                      child: ItemCard(),
+                    );
+                  }),
+                ),
+              ) : Padding(
+                padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*0.32,),
+                child: const Center(child: CircularProgressIndicator(),),
+              ),
+            ),
           ],
         ),
       ),

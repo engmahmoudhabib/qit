@@ -7,7 +7,7 @@ class GetCategoriesResponse {
   GetCategoriesResponse(
     this.repository,
   );
-  Future<Either<Failure, List<String>>> call() async {
+  Future<Either<Failure, List<dynamic>>> call() async {
     return await repository.getCategoriesResponse();
   }
 }
