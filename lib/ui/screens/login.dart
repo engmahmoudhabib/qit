@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qit/blocs/login_bloc.dart';
+
 import 'package:qit/core/constants.dart';
 import 'package:qit/ui/widgets/login/input_text.dart';
 import 'package:qit/ui/widgets/login/login_button.dart';
@@ -11,6 +13,14 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+ late LoginBloc _bloc;
+
+  @override
+  void initState() {
+    _bloc = LoginBloc();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: InputText(
                   hint: 'Email Address',
                   obscureText: false,
+                  bloc: _bloc,
                   textInputAction: TextInputAction.next,
                   textInputType: TextInputType.emailAddress,
                   icon: Image.asset(
@@ -85,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: InputText(
                     hint: 'Password',
+                    bloc: _bloc,
                     textInputAction: TextInputAction.done,
                     textInputType: TextInputType.text,
                     obscureText: true,

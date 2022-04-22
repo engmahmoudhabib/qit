@@ -7,7 +7,7 @@ import 'package:qit/ui/screens/login.dart';
 class Routers {
   static FluroRouter router = FluroRouter();
   static Handler loginHandler = Handler(
-    handlerFunc: (BuildContext? context, Map<String, List<String>> parameters) => const LoginScreen(),
+    handlerFunc: (BuildContext? context, Map<String, List<String>> parameters) =>  LoginScreen(),
   );
 
   static Handler homeViewHandler =
