@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:qit/blocs/login_bloc.dart';
 
 import 'package:qit/core/constants.dart';
-import 'package:qit/ui/widgets/login/input_text.dart';
-import 'package:qit/ui/widgets/login/login_button.dart';
+import 'package:qit/features/login/presentation/blocs/login_auth_bloc.dart';
+import 'package:qit/features/login/presentation/widgets/input_text.dart';
+import 'package:qit/features/login/presentation/widgets/login_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -13,8 +13,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
- late LoginBloc _bloc;
-
+  late LoginBloc _bloc;
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   @override
   void initState() {
     _bloc = LoginBloc();
@@ -83,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hint: 'Email Address',
                   obscureText: false,
                   bloc: _bloc,
+                  controller: _emailController,
                   textInputAction: TextInputAction.next,
                   textInputType: TextInputType.emailAddress,
                   icon: Image.asset(
@@ -97,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: InputText(
                     hint: 'Password',
                     bloc: _bloc,
+                    controller: _passwordController,
                     textInputAction: TextInputAction.done,
                     textInputType: TextInputType.text,
                     obscureText: true,
@@ -109,7 +112,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     )),
               ),
-              const LoginButton(),
+              LoginButton(
+                email: _emailController.text,
+                password: _passwordController.text,
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -131,6 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
+
               Padding(
                 padding: EdgeInsets.only(
                   bottom: MediaQuery.of(context).size.height * 0.04,

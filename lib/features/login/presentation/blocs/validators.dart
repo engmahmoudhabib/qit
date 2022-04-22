@@ -18,7 +18,7 @@ mixin Validation {
       StreamTransformer<String, String>.fromHandlers(handleData: (value, sink) {
     if (value.isEmpty) {
       sink.addError('Enter the password');
-    } else if (value.length < 6) {
+    } else if (value.length < 5) {
       sink.addError('The password must have at least 6 characters');
     } else {
       sink.add(value);
