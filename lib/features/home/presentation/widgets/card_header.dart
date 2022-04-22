@@ -4,8 +4,10 @@ import 'package:qit/core/constants.dart';
 import 'rating_container.dart';
 
 class CardHeader extends StatelessWidget {
+   final double rate;
   const CardHeader({
     Key? key,
+    required this.rate,
   }) : super(key: key);
 
   @override
@@ -19,9 +21,9 @@ class CardHeader extends StatelessWidget {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          RatingContainer(),
-          Icon(
+        children:  [
+          RatingContainer(rate: rate),
+        const  Icon(
             Icons.favorite_outline,
             size: 20,
             color: Colors.white,

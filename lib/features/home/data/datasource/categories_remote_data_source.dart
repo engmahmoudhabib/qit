@@ -33,11 +33,11 @@ class CategoriesRemoteDataSourceImpl implements CategoriesRemoteDataSource {
 
       return response.data;
     } on ServerException catch (e) {
-      print('debug-get>>>>> Exception error message : ' + e.errorMessage);
+      print(  e.errorMessage);
 
       throw ServerException(e.errorMessage);
     } catch (e) {
-      print('debug-get steps >>>>> catch error message : ' + e.toString());
+      print( e.toString());
 
       throw ServerException(e.toString());
     }

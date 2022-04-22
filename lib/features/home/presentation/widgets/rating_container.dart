@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:qit/core/constants.dart';
 
 class RatingContainer extends StatelessWidget {
+   final double rate;
   const RatingContainer({
     Key? key,
+    required this.rate,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class RatingContainer extends StatelessWidget {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 TextSpan(
-                    text: "4.6"+"  ",
+                    text: rate.toString()+"  ",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 10,

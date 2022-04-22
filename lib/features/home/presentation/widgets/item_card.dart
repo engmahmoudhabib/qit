@@ -5,7 +5,17 @@ import 'card_header.dart';
 import 'rating_container.dart';
 
 class ItemCard extends StatefulWidget {
-  const ItemCard({Key? key}) : super(key: key);
+  final String? image;
+  final double? price;
+  final String? title;
+  final double? rate;
+  const ItemCard({
+    Key? key,
+    required this.image,
+    required this.price,
+    required this.rate,
+    required this.title,
+  }) : super(key: key);
 
   @override
   State<ItemCard> createState() => _ItemCardState();
@@ -25,7 +35,7 @@ class _ItemCardState extends State<ItemCard> {
           children: [
             Column(
               children: [
-                CardHeader(),
+                CardHeader(rate: widget.rate!,),
                 Container(
                   height:
                       (2 / 3.85) * MediaQuery.of(context).size.height * 0.35,
@@ -42,12 +52,12 @@ class _ItemCardState extends State<ItemCard> {
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.04,
                         width: MediaQuery.of(context).size.width * 0.35,
-                        child: const Text(
-                          'PULSE 3D Wireless Headset bbbbbbbbbbbbbbbbbbbbbbbbbbbbfffbbbbbbbbbbb',
+                        child:  Text(
+                          widget.title!,
                           maxLines: 2,
                           overflow: TextOverflow.clip,
                           softWrap: true,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
                               fontWeight: FontWeight.w600),
@@ -63,15 +73,15 @@ class _ItemCardState extends State<ItemCard> {
                       // ignore: prefer_const_constructors
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: const Text.rich(
+                        child:  Text.rich(
                           TextSpan(
-                            text: "\$ 8988.000" + "   ",
-                            style: TextStyle(
+                            text: "\$ "+widget.price.toString() + "   ",
+                            style: const TextStyle(
                               fontSize: 18,
                               color: Colors.white,
                               fontWeight: FontWeight.w900,
                             ),
-                            children: <TextSpan>[
+                            children: const <TextSpan>[
                               TextSpan(
                                   text: '\$ 900',
                                   style: TextStyle(
@@ -90,21 +100,28 @@ class _ItemCardState extends State<ItemCard> {
               ],
             ),
             Positioned(
-              top: MediaQuery.of(context).size.height*0.05,
-              child: Image.asset(
-                AppConstants.headSetFromAssets,
+             left: MediaQuery.of(context).size.width*0.1,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height*0.25,
+                width: MediaQuery.of(context).size.width*0.25,
+                child: Image.network(
+                  widget.image!,
+                ),
               ),
             ),
-             Positioned(
-              top: MediaQuery.of(context).size.height*0.195,
-              left: MediaQuery.of(context).size.width*0.32,
-              child: ClipRRect( borderRadius: BorderRadius.circular(15,),
+            Positioned(
+              top: MediaQuery.of(context).size.height * 0.195,
+              left: MediaQuery.of(context).size.width * 0.32,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  15,
+                ),
                 child: Container(
                   color: AppConstants.homeBgColor,
-                  height: 40,width: 40,
+                  height: 40,
+                  width: 40,
                   child: Image.asset(
                     AppConstants.cartFromAssets,
-                    
                   ),
                 ),
               ),
@@ -115,7 +132,7 @@ class _ItemCardState extends State<ItemCard> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         elevation: 5,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
       ),
     );
   }

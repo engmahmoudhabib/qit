@@ -5,6 +5,7 @@ import 'package:badges/badges.dart';
 import 'package:qit/features/home/presentation/widgets/horizontal_list_view.dart';
 import 'package:qit/features/home/presentation/widgets/item_card.dart';
 
+import '../../domain/entities/categories_response_model.dart';
 import '../bloc/category_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = true;
-
+  CategoriesResponseModel items =
+      CategoriesResponseModel(categoryItemModel: []);
   @override
   void initState() {
     super.initState();
@@ -73,31 +75,43 @@ class _HomeScreenState extends State<HomeScreen> {
                     isLoading = true;
                   });
                 } else if (state is Loadedd) {
-                   setState(() {
+                  setState(() {
                     isLoading = false;
                   });
+                  items = state.response;
                 } else if (state is Errorr) {
-                   setState(() {
+                  setState(() {
                     isLoading = false;
                   });
                 }
               },
-              child: isLoading == false ? Container(
-                height: MediaQuery.of(context).size.height * 0.8,
-                width: MediaQuery.of(context).size.width,
-                child: GridView.count(
-                  childAspectRatio: 9 / 14,
-                  crossAxisCount: 2,
-                  children: List.generate(20, (index) {
-                    return Center(
-                      child: ItemCard(),
-                    );
-                  }),
-                ),
-              ) : Padding(
-                padding:  EdgeInsets.only(top:MediaQuery.of(context).size.height*0.32,),
-                child: const Center(child: CircularProgressIndicator(),),
-              ),
+              child: isLoading == false
+                  ? Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      width: MediaQuery.of(context).size.width,
+                      child: GridView.count(
+                        childAspectRatio: 9 / 14,
+                        crossAxisCount: 2,
+                        children: List.generate(items.categoryItemModel.length, (index) {
+                          return Center(
+                            child: ItemCard(
+                              image: items.categoryItemModel[index].image,
+                              price: items.categoryItemModel[index].price,
+                              rate: items.categoryItemModel[index].rating?.rate,
+                              title: items.categoryItemModel[index].title,
+                            ),
+                          );
+                        }),
+                      ),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.32,
+                      ),
+                      child: const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
             ),
           ],
         ),

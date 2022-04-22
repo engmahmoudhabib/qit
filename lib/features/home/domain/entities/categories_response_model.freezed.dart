@@ -21,13 +21,8 @@ CategoriesResponseModel _$CategoriesResponseModelFromJson(
 
 /// @nodoc
 mixin _$CategoriesResponseModel {
-  int? get id => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  String? get category => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
-  RatingResponseModel? get rating => throw _privateConstructorUsedError;
+  List<CategoryItemModel> get categoryItemModel =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,16 +35,7 @@ abstract class $CategoriesResponseModelCopyWith<$Res> {
   factory $CategoriesResponseModelCopyWith(CategoriesResponseModel value,
           $Res Function(CategoriesResponseModel) then) =
       _$CategoriesResponseModelCopyWithImpl<$Res>;
-  $Res call(
-      {int? id,
-      String? title,
-      int? price,
-      String? description,
-      String? category,
-      String? image,
-      RatingResponseModel? rating});
-
-  $RatingResponseModelCopyWith<$Res>? get rating;
+  $Res call({List<CategoryItemModel> categoryItemModel});
 }
 
 /// @nodoc
@@ -63,55 +49,14 @@ class _$CategoriesResponseModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? price = freezed,
-    Object? description = freezed,
-    Object? category = freezed,
-    Object? image = freezed,
-    Object? rating = freezed,
+    Object? categoryItemModel = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      category: category == freezed
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      rating: rating == freezed
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as RatingResponseModel?,
+      categoryItemModel: categoryItemModel == freezed
+          ? _value.categoryItemModel
+          : categoryItemModel // ignore: cast_nullable_to_non_nullable
+              as List<CategoryItemModel>,
     ));
-  }
-
-  @override
-  $RatingResponseModelCopyWith<$Res>? get rating {
-    if (_value.rating == null) {
-      return null;
-    }
-
-    return $RatingResponseModelCopyWith<$Res>(_value.rating!, (value) {
-      return _then(_value.copyWith(rating: value));
-    });
   }
 }
 
@@ -122,17 +67,7 @@ abstract class _$CategoriesResponseModelCopyWith<$Res>
           $Res Function(_CategoriesResponseModel) then) =
       __$CategoriesResponseModelCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {int? id,
-      String? title,
-      int? price,
-      String? description,
-      String? category,
-      String? image,
-      RatingResponseModel? rating});
-
-  @override
-  $RatingResponseModelCopyWith<$Res>? get rating;
+  $Res call({List<CategoryItemModel> categoryItemModel});
 }
 
 /// @nodoc
@@ -149,43 +84,13 @@ class __$CategoriesResponseModelCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? price = freezed,
-    Object? description = freezed,
-    Object? category = freezed,
-    Object? image = freezed,
-    Object? rating = freezed,
+    Object? categoryItemModel = freezed,
   }) {
     return _then(_CategoriesResponseModel(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      price: price == freezed
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      category: category == freezed
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String?,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-      rating: rating == freezed
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as RatingResponseModel?,
+      categoryItemModel: categoryItemModel == freezed
+          ? _value.categoryItemModel
+          : categoryItemModel // ignore: cast_nullable_to_non_nullable
+              as List<CategoryItemModel>,
     ));
   }
 }
@@ -194,35 +99,22 @@ class __$CategoriesResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_CategoriesResponseModel implements _CategoriesResponseModel {
   const _$_CategoriesResponseModel(
-      {required this.id,
-      required this.title,
-      required this.price,
-      required this.description,
-      required this.category,
-      required this.image,
-      required this.rating});
+      {required final List<CategoryItemModel> categoryItemModel})
+      : _categoryItemModel = categoryItemModel;
 
   factory _$_CategoriesResponseModel.fromJson(Map<String, dynamic> json) =>
       _$$_CategoriesResponseModelFromJson(json);
 
+  final List<CategoryItemModel> _categoryItemModel;
   @override
-  final int? id;
-  @override
-  final String? title;
-  @override
-  final int? price;
-  @override
-  final String? description;
-  @override
-  final String? category;
-  @override
-  final String? image;
-  @override
-  final RatingResponseModel? rating;
+  List<CategoryItemModel> get categoryItemModel {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categoryItemModel);
+  }
 
   @override
   String toString() {
-    return 'CategoriesResponseModel(id: $id, title: $title, price: $price, description: $description, category: $category, image: $image, rating: $rating)';
+    return 'CategoriesResponseModel(categoryItemModel: $categoryItemModel)';
   }
 
   @override
@@ -230,27 +122,14 @@ class _$_CategoriesResponseModel implements _CategoriesResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _CategoriesResponseModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.category, category) &&
-            const DeepCollectionEquality().equals(other.image, image) &&
-            const DeepCollectionEquality().equals(other.rating, rating));
+                .equals(other.categoryItemModel, categoryItemModel));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(category),
-      const DeepCollectionEquality().hash(image),
-      const DeepCollectionEquality().hash(rating));
+      runtimeType, const DeepCollectionEquality().hash(categoryItemModel));
 
   @JsonKey(ignore: true)
   @override
@@ -266,31 +145,15 @@ class _$_CategoriesResponseModel implements _CategoriesResponseModel {
 
 abstract class _CategoriesResponseModel implements CategoriesResponseModel {
   const factory _CategoriesResponseModel(
-      {required final int? id,
-      required final String? title,
-      required final int? price,
-      required final String? description,
-      required final String? category,
-      required final String? image,
-      required final RatingResponseModel? rating}) = _$_CategoriesResponseModel;
+          {required final List<CategoryItemModel> categoryItemModel}) =
+      _$_CategoriesResponseModel;
 
   factory _CategoriesResponseModel.fromJson(Map<String, dynamic> json) =
       _$_CategoriesResponseModel.fromJson;
 
   @override
-  int? get id => throw _privateConstructorUsedError;
-  @override
-  String? get title => throw _privateConstructorUsedError;
-  @override
-  int? get price => throw _privateConstructorUsedError;
-  @override
-  String? get description => throw _privateConstructorUsedError;
-  @override
-  String? get category => throw _privateConstructorUsedError;
-  @override
-  String? get image => throw _privateConstructorUsedError;
-  @override
-  RatingResponseModel? get rating => throw _privateConstructorUsedError;
+  List<CategoryItemModel> get categoryItemModel =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CategoriesResponseModelCopyWith<_CategoriesResponseModel> get copyWith =>
