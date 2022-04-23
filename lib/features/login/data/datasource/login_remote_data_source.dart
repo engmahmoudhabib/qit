@@ -1,8 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:qit/core/exceptions.dart';
+import 'package:qit/core/providers.dart';
 import 'package:qit/features/login/domain/entities/login_request_model.dart';
 import 'package:qit/features/login/domain/entities/login_response_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 abstract class LoginRemoteDataSource {
@@ -36,14 +40,17 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
         _baseUrl + '/api/authaccount/login',
         data: request.toJson(),
       );
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(
+          'token', Map<String, dynamic>.from(response.data)['message']);
 
       return LoginResponseModel.fromJson(response.data);
     } on ServerException catch (e) {
-      print(  e.errorMessage);
+      print(e.errorMessage);
 
       throw ServerException(e.errorMessage);
     } catch (e) {
-      print( e.toString());
+      print(e.toString());
 
       throw ServerException(e.toString());
     }

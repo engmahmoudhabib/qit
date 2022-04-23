@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qit/core/providers.dart';
 import 'package:qit/features/login/domain/entities/login_request_model.dart';
-
+import 'package:qit/features/login/data/datasource/login_remote_data_source.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../blocs/login_bloc.dart';
 
 class LoginButton extends StatefulWidget {
@@ -28,7 +29,8 @@ class _LoginButtonState extends State<LoginButton> {
       height: 50,
       width: 300,
       child: BlocListener<LoginBloc, LoginState>(
-        listener: (context, state) {
+        listener: (context, state) async {
+          final prefs = await SharedPreferences.getInstance();
           if (state is Loaded && state.response.data != null) {
             setState(() {
               isLoading = false;
@@ -42,10 +44,11 @@ class _LoginButtonState extends State<LoginButton> {
             setState(() {
               isLoading = false;
             });
+           
             CoolAlert.show(
               context: context,
               type: CoolAlertType.error,
-              text: state.errorMessage,
+              text: prefs.getString('token'),
             );
           } else if (state is Loaded && state.response.data == null) {
             setState(() {
@@ -54,7 +57,7 @@ class _LoginButtonState extends State<LoginButton> {
             CoolAlert.show(
               context: context,
               type: CoolAlertType.error,
-              text: state.response.toJson()['Message'],
+              text: prefs.getString('token'),
             );
           }
         },
@@ -65,32 +68,33 @@ class _LoginButtonState extends State<LoginButton> {
                   return AbsorbPointer(
                     absorbing: error,
                     child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(error == true? Colors.grey: Colors.black),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                            50.0,
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                            error == true ? Colors.grey : Colors.black),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                              50.0,
+                            ),
                           ),
                         ),
                       ),
+                      onPressed: () {
+                        LoginRequest request = LoginRequest(
+                          email: widget.email,
+                          password: widget.password,
+                        );
+                        BlocProvider.of<LoginBloc>(context).add(
+                          GetLoginResponseEvent(
+                            request,
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "LOGIN".toUpperCase(),
+                      ),
                     ),
-                    onPressed:  () {
-                      LoginRequest request = LoginRequest(
-                        email: widget.email,
-                        password: widget.password,
-                      );
-                      BlocProvider.of<LoginBloc>(context).add(
-                        GetLoginResponseEvent(
-                          request,
-                        ),
-                      );
-                    },
-                    child: Text(
-                    
-                      "LOGIN".toUpperCase(),
-                    ),
-                                  ),
                   );
                 },
               )

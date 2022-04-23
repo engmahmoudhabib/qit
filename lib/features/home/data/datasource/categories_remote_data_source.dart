@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:qit/core/exceptions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class CategoriesRemoteDataSource {
   Future<List<dynamic>> getCategoriesResponse();
@@ -30,7 +31,9 @@ class CategoriesRemoteDataSourceImpl implements CategoriesRemoteDataSource {
       Response response = await dio.get(
         _baseUrl + 'products/categories',
       );
-
+final prefs = await SharedPreferences.getInstance();
+      prefs.setString(
+          'token', Map<String, dynamic>.from(response.data)['message']);
       return response.data;
     } on ServerException catch (e) {
       print(  e.errorMessage);

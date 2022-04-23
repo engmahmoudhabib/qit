@@ -3,6 +3,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:qit/core/exceptions.dart';
 import 'package:qit/features/home/domain/entities/categories_response_model.dart';
 import 'package:qit/features/home/domain/entities/category_item_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class CategoryRemoteDataSource {
   Future<CategoriesResponseModel> getCategoryResponse(
@@ -38,9 +39,11 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
       );
       List<CategoryItemModel> items = [];
       response.data.forEach((e) {
-       items.add( CategoryItemModel.fromJson(e));
+        items.add(CategoryItemModel.fromJson(e));
       });
-
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString(
+          'token', Map<String, dynamic>.from(response.data)['message']);
       return CategoriesResponseModel(categoryItemModel: items);
     } on ServerException catch (e) {
       print(e.errorMessage);

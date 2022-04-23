@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qit/features/home/presentation/screens/home.dart';
 import 'package:qit/features/login/presentation/screens/login.dart';
 import 'core/router.dart';
 // ignore: implementation_imports, unnecessary_import, import_of_legacy_library_into_null_safe
@@ -49,8 +48,8 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Roboto',
           ),
           debugShowCheckedModeBanner: false,
-          home: const HomeScreen(),
-          initialRoute: 'home',
+          home: const LoginScreen(),
+          initialRoute: 'login',
           onGenerateRoute: Routers.router.generator),
     );
   }
