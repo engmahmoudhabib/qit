@@ -1,7 +1,9 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qit/core/providers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/categories_bloc.dart';
 import '../bloc/category_bloc.dart';
 import 'list_view_text.dart';
@@ -30,7 +32,8 @@ class _HorizontalListViewState extends State<HorizontalListView> {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return BlocListener<CategoriesBloc, CategoriesState>(
-          listener: (context, state) {
+          listener: (context, state) async {
+             final prefs = await SharedPreferences.getInstance();
             if (state is Loading) {
               setState(() {
                 isLoading = true;
@@ -48,9 +51,15 @@ class _HorizontalListViewState extends State<HorizontalListView> {
 
               });
             } else if (state is Error) {
-              setState(() {
-                isLoading = false;
-              });
+             setState(() {
+              isLoading = false;
+            });
+           
+            CoolAlert.show(
+              context: context,
+              type: CoolAlertType.error,
+              text: prefs.getString('token'),
+            );
             }
           },
           child: Container(

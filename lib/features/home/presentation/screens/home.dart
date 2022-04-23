@@ -1,9 +1,11 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qit/core/constants.dart';
 import 'package:badges/badges.dart';
 import 'package:qit/features/home/presentation/widgets/horizontal_list_view.dart';
 import 'package:qit/features/home/presentation/widgets/item_card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/entities/categories_response_model.dart';
 import '../bloc/category_bloc.dart';
@@ -69,7 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 20,
             ),
             BlocListener<CategoryBloc, CategoryState>(
-              listener: (context, state) {
+              listener: (context, state) async {
+                 final prefs = await SharedPreferences.getInstance();
                 if (state is Loadingg) {
                   setState(() {
                     isLoading = true;
@@ -81,8 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   items = state.response;
                 } else if (state is Errorr) {
                   setState(() {
-                    isLoading = false;
-                  });
+              isLoading = false;
+            });
+           
+            CoolAlert.show(
+              context: context,
+              type: CoolAlertType.error,
+              text: prefs.getString('token'),
+            );
                 }
               },
               child: isLoading == false
